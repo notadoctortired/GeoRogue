@@ -4,35 +4,88 @@ import pygame, time, random
 def round_init(enemy_moves):
     global rounds
     global health
+    global status_rounds
+    global status_active
+    global target
 
     rounds += 1
     round_move = random.choice(enemy_moves)
 
-    if round_move[1] == "Special":
+    if status_rounds <= 0:
+        status_active = False
+        target = ""
+        status_user = ""
+
+    if round_move[1] == "Special" and target != "enemy":
         if round_move[0] == "Burn":
             status_user = "enemy"
             burn(status_user)
+        if round_move[0] == "Freeze Ray":
+            status_user = "enemy"
+            freeze(status_user)
     else:
-        if geo_choice == "circle" and round_move[1] == "Physical":
+        if geo_choice == "circle" and round_move[1] == "Physical" and target != "enemy":
             health -= (round_move[2]*1.15)
-        elif geo_choice == "square" and round_move[1] == "Magic":
+        elif geo_choice == "square" and round_move[1] == "Magic" and target != "enemy":
             health -= (round_move[2]*1.15)
     print(rounds)
 
 def burn(status_user):
     global status_active
     global status_rounds
+    global status_type
+    global target
+    global health
+    global total_health
+    global enemy_health
+    global enemy_total_health
 
-    status_active = True
-    status_rounds = random.randrange(3,5)
+    if status_active == False:
+        status_type = "burn"
+        status_active = True
+        status_rounds = random.randrange(3,5)
 
-    if status_user == "enemy":
-        global health
-        global total_health
-        health -= (total_health/total_health)
-        print("burn used!") 
+        if status_user == "enemy":
+            target = "user"
+            health -= (total_health * 0.03)
+            print("burn used!") 
+        elif status_user == "user":
+            target = "enemy"
+            enemy_health -= (enemy_total_health * 0.03)
+            print("burn used!")
 
+    else:
+        if target == "user":
+            health -= (total_health * 0.03)
+        elif target == "enemy":
+            enemy_health -= (enemy_total_health * 0.03)
+
+        print("applying burn damage!")
+    
     status_rounds -= 1
+
+def freeze(status_user):
+    global status_rounds
+    global status_active
+    global status_type
+    global target
+
+    if status_active == False:
+        status_type = "frozen"
+        status_active = True
+        status_rounds = random.randrange()
+
+        if status_user == "enemy":
+            target = "user"
+        elif status_user == "user":
+            target = "enemy"
+
+        print("You're frozen!")
+    elif status_active == True:
+        print("Target already frozen!")
+
+        if status_user == "enemy":
+            status_rounds -= 1
 
 
 
@@ -47,7 +100,9 @@ rounds = 0
 uptime = 0
 status_rounds = 0
 status_active = False
+status_type = ""
 status_user = ""
+target = ""
 
 # Health and Damage Boost
 health = 100
@@ -59,14 +114,14 @@ with open("config.txt") as file:
 
     if geo_choice == "square":
         health = 125
-        total_health = health
     elif geo_choice == "circle":
-        total_health = health
         dmg = 1.20
     else:
         print("Critical error! Geo not found in config.txt file!")
         time.sleep(3)
         quit()
+
+total_health = health
 
 # Enemy Geo Config
 enemy_geo_num = random.randint(1,10)
@@ -89,6 +144,8 @@ elif geo_choice == "square": # Whereas Square Players have a 60% chance to face 
         enemy_geo = "square"
         enemy_health = 125
         enemy_dmg = 100
+
+enemy_total_health = enemy_health
 
 # Physical Moves
 physmoves = [
@@ -114,7 +171,6 @@ magicmoves = [
 specmoves = [
     ("Burn","Special","burnt"),
     ("Freeze Ray","Special","frozen"),
-    ("Zap","Special","paralysed")
 ]
 
 # FPS & Running
@@ -177,18 +233,28 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_1:
+            if event.key == pygame.K_1 and target != "user":
                 enemy_health -= moves[0][2]
                 round_move = round_init(enemy_moves)
-            if event.key == pygame.K_2:
+            if event.key == pygame.K_2 and target != "user":
                 enemy_health -= moves[1][2]
                 round_move = round_init(enemy_moves)
-            if event.key == pygame.K_3:
+            if event.key == pygame.K_3 and target != "user":
                 enemy_health -= moves[2][2]
                 round_move = round_init(enemy_moves)
-            if event.key == pygame.K_4:
+            if event.key == pygame.K_4 and target != "user":
                 print(moves[3][0])
+                status_user = "user"
+                if moves[3][0] == "Burn":
+                    burn(status_user)
+                elif moves[3][0] == "Freeze Ray":
+                    freeze(status_user)
+                
                 round_move = round_init(enemy_moves)
+
+    if status_active == True and target == "user":
+        status_rounds -= 1
+        round_init(enemy_moves)
 
     # Uptime
     uptime_remove = pygame.Rect(450,100,100,50)

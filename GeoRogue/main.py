@@ -1,6 +1,5 @@
 # Modules
 import pygame
-import time
 
 # Ensures that config file is empty upon execution of the main.py scr when a player starts the game
 with open("config.txt","w") as file:
