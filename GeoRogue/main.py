@@ -2,7 +2,7 @@
 import pygame
 
 # Ensures that config file is empty upon execution of the main.py scr when a player starts the game
-with open("config.txt","w") as file:
+with open("GeoRogue/config.txt","w") as file:
     file.write("")
 
 # Window creation & Customisation
@@ -42,7 +42,7 @@ while running:
         if button_square.collidepoint(event.pos): # Triggers when square button clicked
             print("Square!")
 
-            with open("config.txt","w") as file: # Writes player's choice to config
+            with open("GeoRogue/config.txt","w") as file: # Writes player's choice to config
                 file.write("square")
             with open("game.py") as file: # executes game.py
                 exec(file.read())
@@ -52,7 +52,7 @@ while running:
         if button_circle.collidepoint(event.pos):
             print("Circle!")
 
-            with open("config.txt","w") as file:
+            with open("GeoRogue/config.txt","w") as file:
                 file.write("circle")
             with open("game.py") as file:
                 exec(file.read())

@@ -43,7 +43,7 @@ def burn(status_user):
     if status_active == False:
         status_type = "burn"
         status_active = True
-        status_rounds = random.randrange(3,5)
+        status_rounds = random.choice(range(3,5))
 
         if status_user == "enemy":
             target = "user"
@@ -73,7 +73,7 @@ def freeze(status_user):
     if status_active == False:
         status_type = "frozen"
         status_active = True
-        status_rounds = random.randrange()
+        status_rounds = random.choice(range(1,3))
 
         if status_user == "enemy":
             target = "user"
@@ -109,7 +109,7 @@ health = 100
 dmgboost = 1
 
 # Geo Config
-with open("config.txt") as file:
+with open("GeoRogue/config.txt") as file:
     geo_choice = file.read()
 
     if geo_choice == "square":
@@ -292,16 +292,16 @@ while running:
     if enemy_health <= 0 or health <= 0:
         
         if enemy_health <= 0 and health > 0:
-            with open("condition.txt","w") as file:
+            with open("GeoRogue/condition.txt","w") as file:
                 file.write("") # Ensures previous game result is wiped
                 file.write("win")
-            with open("victories.txt",) as file:
+            with open("GeoRogue/victories.txt",) as file:
                 temp = file.readline()
                 temp = int(temp) + 1
-            with open("victories.txt","w") as file:
+            with open("GeoRogue/victories.txt","w") as file:
                 file.write(str(temp))
         
-        with open("end.py") as file:
+        with open("GeoRogue/end.py") as file:
             exec(file.read())
         pygame.QUIT
 

@@ -11,10 +11,9 @@ Each of them has a set list of moves that they may be given once the battle begi
  - Physical, of which circles are weak to
  - Magic, of which squares are weak to
  - Status, which (depending on the move) have a chance to inflict a type of status, including:
-   - Paralysis, which has a 50% chance to prevent a move for 3-5 turns
    - Burning, which takes 3% of the total health away for 3-5 turns
    - Frozen, which prevents moves for 1-3 turns
 
-Ranges for status (special) moves are calculated using python's random module, specifically randrange.
+Ranges for status (special) moves are calculated using python's random module, specifically random.choice(range()).
 
 Weaknesses apply a 1.15x damage boost to an attack.
