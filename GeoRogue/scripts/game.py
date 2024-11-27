@@ -245,7 +245,7 @@ while running:
             with open("GeoRogue/victories.txt","w") as file:
                 file.write(str(temp))
         
-        with open("GeoRogue/scripts/end.exe") as file:
+        with open("GeoRogue/scripts/end.py") as file:
             exec(file.read())
         pygame.QUIT
 
