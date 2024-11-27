@@ -1,5 +1,4 @@
 import pygame, time, random
-# Reminder - Commit this to game.py on codeberg
 
 def round_init(enemy_moves):
     global rounds
@@ -90,6 +89,7 @@ running = True
 # Generic Button Config
 button_colour = (157,157,157)
 font = pygame.font.Font(None,30)
+smallfont = pygame.font.Font(None, 20)
 screen.fill("white")
 
 # Health label pos
@@ -97,6 +97,10 @@ healthx = 30
 healthy = 300
 en_healthx = 760
 en_healthy = 300
+movesx = 30
+movesy = 320
+en_movesx = 760
+en_movesy = 320
 
 moves = []
 if geo_choice == "square":
@@ -174,9 +178,13 @@ while running:
     # Uptime
     uptime_remove = pygame.Rect(450,100,100,50)
     pygame.draw.rect(screen,(255,255,255),uptime_remove)
-
     uptime_label = font.render(f"{round(uptime)}",True,(0,0,0))
     screen.blit(uptime_label,(450,100))
+
+    rounds_remove = pygame.Rect(450,150,100,50)
+    pygame.draw.rect(screen,(255,255,255),rounds_remove)
+    rounds_label = font.render(f"{rounds}",True,(0,0,0))
+    screen.blit(rounds_label,(450,150))
 
     if geo_choice == "square":
         plr_geo = pygame.Rect(150,50,200,200)
@@ -190,18 +198,30 @@ while running:
     elif enemy_geo == "circle":
         pygame.draw.circle(screen,(255,0,0),(650,150),100)
 
-    # Health
+    # Health and Move Labels
     plr_health = pygame.Rect(healthx,healthy,150,50)
     pygame.draw.rect(screen,(255,255,255),plr_health)
-
     en_health = pygame.Rect(en_healthx,en_healthy, 150,50)
     pygame.draw.rect(screen,(255,255,255),en_health)
 
     plr_health_text = font.render(f"Health: {health}",True,(0,0,0))
     screen.blit(plr_health_text,(healthx,healthy))
-
     en_health_text = font.render(f"Health: {enemy_health}",True,(0,0,0))
     screen.blit(en_health_text,(en_healthx,en_healthy))
+
+    plr_moves = pygame.Rect(movesx,movesy,150,500)
+    pygame.draw.rect(screen,(255,255,255),plr_moves)
+    en_moves = pygame.Rect (en_movesx,en_movesy, 150,500)
+    pygame.draw.rect(screen,(255,255,255),en_moves)
+
+    # Move Text is rendered line by line using separate labels in a for loop, as pygame does not allow for usage of string formatting
+    y = 330
+    for x in range(0,4):
+        move_text = smallfont.render(f"{moves[x][0]} - {moves[x][2]}",True,(0,0,0))
+        screen.blit(move_text,(movesx,y))
+        en_move_text = smallfont.render(f"{enemy_moves[x][0]} - {enemy_moves[x][2]}",True,(0,0,0))
+        screen.blit(en_move_text,(en_movesx,y))
+        y += 20
 
     # Game Over
     if enemy_health <= 0 or health <= 0:
