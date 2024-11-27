@@ -1,6 +1,11 @@
 # Modules
 import pygame
 
+# Initalises mixer so that music can be played
+pygame.mixer.init()
+pygame.mixer.music.load("GeoRogue/Music/beethoven1st.mp3")
+pygame.mixer.music.play(-1,0,0)
+
 # Ensures that config file is empty upon execution of the main.py scr when a player starts the game
 with open("GeoRogue/config.txt","w") as file:
     file.write("")
@@ -10,6 +15,8 @@ pygame.init() # initialises pygame
 ssize = (625,300)
 screen = pygame.display.set_mode(ssize) 
 pygame.display.set_caption("GeoRogue")
+icon = pygame.image.load("GeoRogue/icon.png")
+pygame.display.set_icon(icon)
 
 # FPS & Running
 clock = pygame.time.Clock() # assigns pygame fps to clock
@@ -42,6 +49,9 @@ while running:
         if button_square.collidepoint(event.pos): # Triggers when square button clicked
             print("Square!")
 
+            pygame.mixer.music.stop()
+            pygame.mixer.music.unload()
+
             with open("GeoRogue/config.txt","w") as file: # Writes player's choice to config
                 file.write("square")
             with open("GeoRogue/game.py") as file: # executes game.py
@@ -51,6 +61,8 @@ while running:
 
         if button_circle.collidepoint(event.pos):
             print("Circle!")
+            pygame.mixer.music.stop()
+            pygame.mixer.music.unload()
 
             with open("GeoRogue/config.txt","w") as file:
                 file.write("circle")

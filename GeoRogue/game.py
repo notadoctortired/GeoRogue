@@ -1,5 +1,10 @@
 import pygame, time, random
 
+# Initialises mixer so that music can be loaded and played
+pygame.mixer.init()
+pygame.mixer.music.load("GeoRogue/Music/beethoven3rd.mp3")
+pygame.mixer.music.play(-1,0,0)
+
 def round_init(enemy_moves):
     global rounds
     global health
@@ -20,6 +25,8 @@ pygame.init() # initialises pygame
 ssize = (900,500)
 screen = pygame.display.set_mode(ssize) 
 pygame.display.set_caption("GeoRogue - Battle")
+icon = pygame.image.load("GeoRogue/icon.png")
+pygame.display.set_icon(icon)
 
 # Empty Containers
 rounds = 0
@@ -225,6 +232,8 @@ while running:
 
     # Game Over
     if enemy_health <= 0 or health <= 0:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.unload()
         
         if enemy_health <= 0 and health > 0:
             with open("GeoRogue/condition.txt","w") as file:
