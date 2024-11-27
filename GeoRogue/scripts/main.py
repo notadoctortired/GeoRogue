@@ -54,7 +54,7 @@ while running:
 
             with open("GeoRogue/config.txt","w") as file: # Writes player's choice to config
                 file.write("square")
-            with open("GeoRogue/bin/game.py") as file: # executes game.py
+            with open("GeoRogue/scripts/game.exe") as file: # executes game.py
                 exec(file.read())
 
             pygame.QUIT
@@ -66,7 +66,7 @@ while running:
 
             with open("GeoRogue/config.txt","w") as file:
                 file.write("circle")
-            with open("GeoRogue/bin/game.py") as file:
+            with open("GeoRogue/scripts/game.exe") as file:
                 exec(file.read())
 
             pygame.QUIT
