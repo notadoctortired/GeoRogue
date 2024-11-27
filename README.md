@@ -7,3 +7,14 @@ There are two types of move:
  - Magic, of which squares are weak to
 
 Weaknesses apply a 1.15x damage boost to an attack.
+
+To run the game (through the scripts, functioning executable coming soon) you require the following:
+ - Python 3.12 or above installed
+ - Pygame installed
+  - Windows - pip install pygame
+  - Linux (Debian-based) - sudo apt-get install python3-pygame
+  - Linux (Arch-based) - sudo pacman -S python-pygame
+  - Linux (Fedora-based) - sudo dnf install python-pygame
+  - Mac - xcode-select --install, then do pip3 install pygame
+
+Once you have done so, simply run main.py in scripts and enjoy!
