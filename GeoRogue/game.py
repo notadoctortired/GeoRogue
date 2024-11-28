@@ -2,7 +2,7 @@ import pygame, time, random
 
 # Initialises mixer so that music can be loaded and played
 pygame.mixer.init()
-pygame.mixer.music.load("GeoRogue/Music/beethoven3rd.mp3")
+pygame.mixer.music.load("GeoRogue/GeoRogue/Music/beethoven3rd.mp3")
 pygame.mixer.music.play(-1,0,0)
 
 def round_init(enemy_moves):
@@ -25,7 +25,7 @@ pygame.init() # initialises pygame
 ssize = (900,500)
 screen = pygame.display.set_mode(ssize) 
 pygame.display.set_caption("GeoRogue - Battle")
-icon = pygame.image.load("GeoRogue/icon.png")
+icon = pygame.image.load("GeoRogue/GeoRogue/icon.png")
 pygame.display.set_icon(icon)
 
 # Empty Containers
@@ -33,7 +33,7 @@ rounds = 0
 uptime = 0
 
 # Geo Config
-with open("GeoRogue/config.txt") as file:
+with open("GeoRogue/GeoRogue/config.txt") as file:
     geo_choice = file.read()
 
     if geo_choice == "square":
@@ -236,16 +236,16 @@ while running:
         pygame.mixer.music.unload()
         
         if enemy_health <= 0 and health > 0:
-            with open("GeoRogue/condition.txt","w") as file:
+            with open("GeoRogue/GeoRogue/condition.txt","w") as file:
                 file.write("") # Ensures previous game result is wiped
                 file.write("win")
-            with open("GeoRogue/victories.txt",) as file:
+            with open("GeoRogue/GeoRogue/victories.txt",) as file:
                 temp = file.readline()
                 temp = int(temp) + 1
-            with open("GeoRogue/victories.txt","w") as file:
+            with open("GeoRogue/GeoRogue/victories.txt","w") as file:
                 file.write(str(temp))
         
-        with open("GeoRogue/scripts/end.py") as file:
+        with open("GeoRogue/GeoRogue/end.py") as file:
             exec(file.read())
         pygame.QUIT
 
