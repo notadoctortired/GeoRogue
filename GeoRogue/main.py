@@ -3,7 +3,7 @@ import pygame
 
 # Initalises mixer so that music can be played
 pygame.mixer.init()
-pygame.mixer.music.load("GeoRogue/Music/beethoven1st.mp3")
+pygame.mixer.music.load("beethoven1st.mp3")
 pygame.mixer.music.play(-1,0,0)
 
 # Ensures that config file is empty upon execution of the main.py scr when a player starts the game
