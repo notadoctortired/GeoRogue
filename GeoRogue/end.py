@@ -2,7 +2,7 @@
 import pygame
 
 pygame.mixer.init()
-pygame.mixer.music.load("GeoRogue/GeoRogue/music/duelofthefates.mp3")
+pygame.mixer.music.load("GeoRogue/music/duelofthefates.mp3")
 pygame.mixer.music.play(-1,0,0)
 
 # Window creation & Customisation
@@ -10,7 +10,7 @@ pygame.init() # initialises pygame
 ssize = (900,500)
 screen = pygame.display.set_mode(ssize) 
 pygame.display.set_caption("GeoRogue - Game Over!")
-icon = pygame.image.load("GeoRogue/GeoRogue/data/icon.png")
+icon = pygame.image.load("GeoRogue/data/icon.png")
 pygame.display.set_icon(icon)
 
 # FPS & Running
@@ -31,7 +31,7 @@ while running:
     end_text = font.render("Game Over!",True,(0,0,0))
     screen.blit(end_text,(270,160))
 
-    with open("GeoRogue/GeoRogue/data/condition.txt","r") as file:
+    with open("GeoRogue/data/condition.txt","r") as file:
         con = file.read()
         if con == "win":
             con_text = smallfont.render("You Win!",True,(54, 63, 235))

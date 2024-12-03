@@ -3,11 +3,11 @@ import pygame
 
 # Initalises mixer so that music can be played
 pygame.mixer.init()
-pygame.mixer.music.load("GeoRogue/GeoRogue/music/beethoven1st.mp3")
+pygame.mixer.music.load("GeoRogue/music/beethoven1st.mp3")
 pygame.mixer.music.play(-1,0,0)
 
 # Ensures that config file is empty upon execution of the main.py scr when a player starts the game
-with open("GeoRogue/GeoRogue/data/config.txt","w") as file:
+with open("GeoRogue/data/config.txt","w") as file:
     file.write("")
 
 # Window creation & Customisation
@@ -15,7 +15,7 @@ pygame.init() # initialises pygame
 ssize = (625,300)
 screen = pygame.display.set_mode(ssize) 
 pygame.display.set_caption("GeoRogue")
-icon = pygame.image.load("GeoRogue/GeoRogue/data/icon.png")
+icon = pygame.image.load("GeoRogue/data/icon.png")
 pygame.display.set_icon(icon)
 
 # FPS & Running
@@ -52,7 +52,7 @@ while running:
             pygame.mixer.music.stop()
             pygame.mixer.music.unload()
 
-            with open("GeoRogue/GeoRogue/data/config.txt","w") as file: # Writes player's choice to config
+            with open("GeoRogue/data/config.txt","w") as file: # Writes player's choice to config
                 file.write("square")
             with open("GeoRogue/GeoRogue/game.py") as file: # executes game.py
                 exec(file.read())
@@ -64,9 +64,9 @@ while running:
             pygame.mixer.music.stop()
             pygame.mixer.music.unload()
 
-            with open("GeoRogue/GeoRogue/data/config.txt","w") as file:
+            with open("GeoRogue/data/config.txt","w") as file:
                 file.write("circle")
-            with open("GeoRogue/GeoRogue/game.py") as file:
+            with open("GeoRogue/game.py") as file:
                 exec(file.read())
 
             pygame.QUIT
