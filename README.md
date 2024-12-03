@@ -17,4 +17,4 @@ To run the game (through the scripts, functioning executable coming soon) you re
   - Linux (Fedora-based) - sudo dnf install python-pygame
   - Mac - xcode-select --install, then do pip3 install pygame
 
-Once you have done so, simply run main.py in scripts and enjoy!
+Once you have done so, simply run main.py and enjoy!
