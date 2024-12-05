@@ -106,7 +106,7 @@ en_healthx = 760
 en_healthy = 300
 movesx = 30
 movesy = 320
-en_movesx = 760
+en_movesx = 750
 en_movesy = 320
 
 moves = []
@@ -224,9 +224,9 @@ while running:
     # Move Text is rendered line by line using separate labels in a for loop, as pygame does not allow for usage of string formatting
     y = 330
     for x in range(0,4):
-        move_text = smallfont.render(f"{moves[x][0]} - {moves[x][2]}",True,(0,0,0))
+        move_text = smallfont.render(f"{x+1} - {moves[x][0]} - {moves[x][2]}",True,(0,0,0))
         screen.blit(move_text,(movesx,y))
-        en_move_text = smallfont.render(f"{enemy_moves[x][0]} - {enemy_moves[x][2]}",True,(0,0,0))
+        en_move_text = smallfont.render(f"{x+1} - {enemy_moves[x][0]} - {enemy_moves[x][2]}",True,(0,0,0))
         screen.blit(en_move_text,(en_movesx,y))
         y += 20
 
